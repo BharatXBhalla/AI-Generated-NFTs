@@ -1,0 +1,208 @@
+
+
+html, body {
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+    color: #28282F;
+    margin: 0em;
+}
+
+body {
+	margin: 0em;
+	padding: 0em;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;	
+}
+
+p, img, div, canvas {
+
+	vertical-align: top;
+}
+
+::-moz-selection {
+    background: #34495e;
+    background-color: #34495e;
+    color: #FFF;
+}
+
+::selection {
+    background: #34495e;
+    background-color: #34495e;
+    color: #FFF;
+}
+
+.hide {
+	display: none;
+}
+
+#menu {
+	width: 28em;
+
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: .9em;
+
+    text-align: center;
+	font-size: 1.2em;
+
+	background-color: #fff;
+	opacity: 1;
+
+	background: #ffffff;
+
+	-webkit-box-shadow: 0em 0.25em .75em rgba(124,124,124, 0.5);
+	-moz-box-shadow: 0em 0.25em .75em rgba(124,124,124, 0.5);
+	box-shadow: 0em 0.25em .75em rgba(124,124,124, 0.5);
+}
+
+	#menu #img_container {
+		height: 14.5em;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+
+		border-top-left-radius: .9em;
+		border-top-right-radius: .9em;
+	}
+
+		#menu #img_container img {
+			flex-shrink: 0;
+			width: 105%;
+		}
+
+	#menu #content {
+		padding: .5em;
+	}
+
+    #menu #content div {
+        margin-bottom: 1em;
+    }
+
+    #menu h1 {
+        font-family: 'Oswald';
+        letter-spacing: .25em;
+    }
+
+    #menu p {
+        font-family: 'Lato';
+        margin: 0em;
+    }
+
+	#menu .play {
+		display: inline-block;
+		border-radius: .9em;
+		border: solid #48484F .1em;
+		padding-left: 1.5em;
+		padding-right: 1.5em;
+		padding-top: .12em;
+		padding-bottom: .12em;
+
+		margin-bottom: 1.5em;
+        transition: all .4s;
+	}
+
+	#menu .play:hover {
+		border: solid #A8A8AF .1em;
+		color: #A8A8AF;
+		cursor: pointer;
+        transition: all .4s;
+	}
+
+		#menu .play p {
+            font-family: 'Oswald';
+            letter-spacing: .125em;
+            color: #48484F;
+			font-size: 1.3em;
+            transition: all .4s;
+		}
+
+        #menu .play:hover p {
+            color: #A8A8AF;
+            transition: all .4s;
+        }
+
+#background_menu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: #111;
+    opacity: .125;
+}
+
+canvas {
+	width: 100%;
+	height: 100%;
+}
+
+.overlay {
+	height: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	down: 0;
+	right: 0;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,1);
+	overflow-x: hidden;
+	transition: 0.5s;
+  }
+  
+  .overlay-content {
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+  }
+  
+  .overlay a{
+	padding: 8px;
+	text-decoration: none;
+	font-size: 36px;
+	color: white;
+	display: block;
+	transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+	color: black;
+	background-color: white;
+	cursor: pointer;
+  }
+  
+  .overlay .closebtn {
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 60px;
+  }
+.keyoverlay {
+	height: 0;
+	width: 30%;
+	position: fixed;
+	z-index: 1;
+	top:80%;
+	right: 2%;
+	background-color: rgb(19, 17, 17);
+	overflow: hidden;
+	transition: 0.5s;
+	border-radius: 1rem;
+	
+}
+.keyoverlay-content {
+	position: relative;
+	top: 1%;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+font-size: 1.31rem;
+font-weight: 700;
+color: white;
+  }
