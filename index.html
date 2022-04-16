@@ -28,7 +28,7 @@
 	<div id="menu">
 
 		<div id="img_container">
-			<img src="img/test.png">
+			<img src="img/logo.jpg">
 		</div>
 		<div id="content">
 			<h1>AI GALLERY</h1>
@@ -65,6 +65,12 @@
 	<script type="text/javascript" src="js/PaintOverlay.js"></script>
 	<script type="text/javascript" src="js/NFTData.info.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script>
+		var canvas = document.querySelector("canvas");
+		canvas.addEventListener("webglcontextlost", function(event) {
+    event.preventDefault();
+}, false);
+	</script>
 
 </body>
 </html>

@@ -274,15 +274,18 @@ else {
 							}
 						}
 						//let changethis = gal.paintings.index((ele)=>ele.id == gal.selected_painting_id);
-
+						// gal.paintings[index].material.map.image.set("/img/logo.jpg")
+						console.log(gal.paintings[index].material.map.dispose);
 						axios({
 							method: 'post',
 							url: 'http://127.0.0.1:5000/generate',
 						  }).then((data)=>{
-							  var texture = THREE.ImageUtils.loadTexture(data.data);
+							  var texture =new THREE.TextureLoader().load(data.data);
 						  texture.minFilter = THREE.LinearFilter;
 						  var img = new THREE.MeshBasicMaterial({ map: texture });
-						  delete gal.paintings[index].material;
+						  
+						  gal.paintings[index].material.map.dispose();
+						  delete gal.paintings[index].material.map;
 						  gal.paintings[index].material = img;
 						  });
 						
@@ -324,7 +327,7 @@ else {
 
             //Phong is for shiny surfaces
 			gal.floorMaterial = new THREE.MeshPhongMaterial( {map: gal.floorText } );
-			gal.floor = new THREE.Mesh(new THREE.PlaneGeometry(45,45), gal.floorMaterial);
+			gal.floor = new THREE.Mesh(new THREE.PlaneGeometry(15,15), gal.floorMaterial);
 
 			gal.floor.rotation.x = Math.PI/2;
             gal.floor.rotation.y = Math.PI;
@@ -391,16 +394,16 @@ else {
 					var artwork = new Image();
 					var ratiow = 0;
 					var ratioh = 0;
-					var source = './img/Artworks/' + plBuilder.getPainting(index).getImgname();
+					var source = './img/' + plBuilder.getPainting(index).getImgname();
 					artwork.src = source;
                     
-                    var texture = THREE.ImageUtils.loadTexture(artwork.src);
+                    var texture = new THREE.TextureLoader().load(artwork.src);
                     texture.minFilter = THREE.LinearFilter;
 					var img = new THREE.MeshBasicMaterial({ map: texture });
 
 					artwork.onload = (function(){
-						ratiow = artwork.width/300;
-						ratioh = artwork.height/300;
+						ratiow = artwork.width/100;
+						ratioh = artwork.height/100;
 						// plane for artwork
 						var plane = new THREE.Mesh(new THREE.PlaneGeometry(ratiow, ratioh),img,); //width, height
 						plane.overdraw = true;
@@ -408,7 +411,7 @@ else {
 						if(index < 15) //bottom half
 						{
 							//plane.rotation.z = Math.PI/2;
-                            plane.position.set(2.5 * index - 5,2,-2.96); //y and z kept constant
+                            plane.position.set(2.5 * index - 2.5,3,-2.96); //y and z kept constant
 						}
 						else
 						{

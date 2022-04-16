@@ -12,6 +12,25 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 
 
+def save_samples(index, latent_tensors, show=True):
+    fake_images = generator(latent_tensors)
+    print(fake_images.shape)
+    fake_fname = 'generated-images-{0}.png'.format(index)
+    save_image(denorm(fake_images), os.path.join("./img", fake_fname), nrow=8)
+    return "img/"+fake_fname
+    if show:
+        fig, ax = plt.subplots(figsize=(8, 8))
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.imshow(make_grid(fake_images.cpu().detach(), nrow=8).permute(1, 2, 0))
+
+def show_images(images, nmax=64):
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.set_xticks([]); ax.set_yticks([])
+    ax.imshow(make_grid(denorm(images.detach()[:nmax]), nrow=8).permute(1, 2, 0))
+def show_batch(dl, nmax=64):
+    for images, _ in dl:
+        show_images(images, nmax)
+        break
 
 def get_default_device():
     """Pick GPU if available, else CPU"""
@@ -49,6 +68,8 @@ image_size = 64
 batch_size = 128
 stats = (0.5, 0.5, 0.5), (0.5, 0.5, 0.5)
 latent_size = 128
+
+
 generator = nn.Sequential(
     # in: latent_size x 1 x 1
 
@@ -77,9 +98,7 @@ generator = nn.Sequential(
     # out: 3 x 64 x 64
 )
 generator = to_device(generator, device)
-generator.load_state_dict(torch.load('gan_model_1.pth'))
-
-
+generator.load_state_dict(torch.load('gan_model_2.pth', map_location=torch.device('cpu')))
 from torchvision.utils import save_image
 
 
@@ -104,12 +123,15 @@ import random
                     
 @app.route("/generate",methods=['GET','POST'])
 def generate():
-    fixed_latent = torch.randn(1, 128, 1, 1, device=device)
-    ima=denorm(generator(fixed_latent.detach())[:64]).cpu().detach()[0].mT.mT
+    # fixed_latent = torch.randn(1, 128, 1, 1, device=device)
+    # ima=denorm(generator(fixed_latent.detach())[:64]).cpu().detach()[0].mT.mT
     res = ''.join(random.choices(string.ascii_uppercase +
                              string.digits, k = 7))
-    save_image(ima, 'img/'+str(res)+'.jpg')
-    return 'img/'+str(res)+'.jpg'
+    # save_image(ima, 'img/'+str(res)+'.jpg')
+    xb = torch.randn(64, latent_size, 1, 1) 
+
+    # return 'img/'+str(res)+'.jpg'
+    return save_samples(res, xb,False)
 
 # model=Model()
 # model.load_model(os.getcwd()+"/"+model_file_name)
