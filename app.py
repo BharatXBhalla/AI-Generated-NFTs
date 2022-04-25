@@ -16,7 +16,7 @@ def save_samples(index, latent_tensors, show=True):
     fake_images = generator(latent_tensors)
     print(fake_images.shape)
     fake_fname = 'generated-images-{0}.png'.format(index)
-    save_image(denorm(fake_images), os.path.join("./img", fake_fname), nrow=8)
+    save_image(denorm(fake_images), os.path.join("F:/proj/AI-Generated-NFTs/img", fake_fname), nrow=8)
     return "img/"+fake_fname
     if show:
         fig, ax = plt.subplots(figsize=(8, 8))
@@ -98,7 +98,7 @@ generator = nn.Sequential(
     # out: 3 x 64 x 64
 )
 generator = to_device(generator, device)
-generator.load_state_dict(torch.load('gan_model_2.pth', map_location=torch.device('cpu')))
+generator.load_state_dict(torch.load('F:/proj/AI-Generated-NFTs/gan_model_2.pth', map_location=torch.device('cpu')))
 from torchvision.utils import save_image
 
 
